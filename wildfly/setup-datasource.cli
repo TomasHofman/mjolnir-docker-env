@@ -1,0 +1,5 @@
+embed-server --std-out=echo
+module add --name=org.postgresql --slot=main --resources=/opt/jboss/postgresql-9.4.1208.jar --dependencies=javax.api,javax.transaction.api
+/subsystem=datasources/jdbc-driver=postgres:add(driver-name=postgres,driver-module-name=org.postgresql,driver-class-name=org.postgresql.Driver)
+data-source add --jndi-name=java:jboss/datasources/MjolnirDS --name=MjolnirDS --connection-url="jdbc:postgresql://db/mjolnir" --driver-name=postgres --user-name=mjolnir
+/subsystem=naming/binding="java:jboss/datasources/mjolnir/MjolnirDS":add(lookup="java:/jboss/datasources/MjolnirDS", binding-type=lookup)

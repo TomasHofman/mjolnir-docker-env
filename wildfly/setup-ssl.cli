@@ -1,0 +1,5 @@
+embed-server --std-out=echo
+/core-service=management/security-realm=ApplicationRealm/server-identity=ssl:add(keystore-path=/opt/jboss/server.keystore,\
+    keystore-password=changeit, alias=jboss)
+reload
+/subsystem=undertow/server=default-server/https-listener=https:add(socket-binding=https, security-realm=ApplicationRealm)
